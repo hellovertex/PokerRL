@@ -710,7 +710,12 @@ class PokerEnv:
             if processed_action[1] < self._get_current_total_min_raise():
                 self.capped_raise.happened_this_round = True
                 self.capped_raise.player_that_raised = self.current_player
-                self.capped_raise.player_that_cant_reopen = self.last_raiser  # might be None. Then everyone can raise.
+                if self.last_raiser is None:
+                    self.capped_raise.player_that_cant_reopen = None
+                else:
+                    self.capped_raise.player_that_cant_reopen = self.last_raiser if self.seats[self.last_raiser.seat_id].current_bet != 0 else None
+                # might be None. Then everyone can raise.
+                # self.capped_raise.player_that_cant_reopen = self.last_raiser  # might be None. Then everyone can raise.
 
             elif self.capped_raise.happened_this_round is True:
                 # if someone shoved under minraise over someone else's raise the original raiser can't reraise again!
