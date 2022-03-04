@@ -713,7 +713,8 @@ class PokerEnv:
                 if self.last_raiser is None:
                     self.capped_raise.player_that_cant_reopen = None
                 else:
-                    self.capped_raise.player_that_cant_reopen = self.last_raiser if self.seats[self.last_raiser.seat_id].current_bet != 0 else None
+                    self.capped_raise.player_that_cant_reopen = self.last_raiser if self.seats[
+                                                                                        self.last_raiser.seat_id].current_bet != 0 else None
                 # might be None. Then everyone can raise.
                 # self.capped_raise.player_that_cant_reopen = self.last_raiser  # might be None. Then everyone can raise.
 
@@ -1374,6 +1375,19 @@ class PokerEnv:
         self.board = np.copy(cards_state_dict["board"])
         for p in range(self.N_SEATS):
             self.seats[p].hand = np.copy(cards_state_dict["hand"][p])
+
+    def load_deck_state_dict(self, deck_state_dict):
+        """User method"""
+        self.deck.load_state_dict(deck_state_dict["deck"])
+
+    def load_board_state_dict(self, board_state_dict):
+        """User method"""
+        self.board = np.copy(board_state_dict["board"])
+
+    def load_hand_cards_state_dict(self, hand_cards_state_dict):
+        """User method"""
+        for p in range(self.N_SEATS):
+            self.seats[p].hand = np.copy(hand_cards_state_dict["hand"][p])
 
     def reshuffle_remaining_deck(self):
         self.deck.shuffle()
