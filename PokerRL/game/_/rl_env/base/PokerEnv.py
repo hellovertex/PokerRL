@@ -744,7 +744,7 @@ class PokerEnv:
         all_nonfold_p = [p for p in self.seats if not p.folded_this_episode]
 
         # just let next player run in this round
-        info = None
+        info = {}
         if self._should_continue_in_this_round(all_non_all_in_and_non_fold_p=all_non_all_in_and_non_fold_p,
                                                all_nonfold_p=all_nonfold_p):
             self.current_player = self._get_player_that_has_to_act_next()
@@ -752,7 +752,11 @@ class PokerEnv:
 
             if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                 info = {"chance_acts": False, "state_dict_before_money_move": None}
-
+            info['continue_round'] = 1
+            # info['first_actor_next_stage'] = dont do it because of offset
+            info['rundown'] = 0
+            info['next_round'] = 0
+            info['single_nonfold_p'] = 0
         # next round
         elif len(all_non_all_in_and_non_fold_p) > 1:
 
@@ -770,7 +774,10 @@ class PokerEnv:
                 if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                     info = {"chance_acts": True, "state_dict_before_money_move": self.state_dict()}
                 self._next_round()
-
+            info['continue_round'] = 0
+            info['rundown'] = 0
+            info['next_round'] = 1
+            info['single_nonfold_p'] = 0
         # rundown
         elif len(all_nonfold_p) > 1:  # rundown only makes sense if >0 are allin and 1 is not or >2 are allin.
             is_terminal = True
@@ -778,6 +785,10 @@ class PokerEnv:
 
             if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                 info = {"chance_acts": False, "state_dict_before_money_move": state_before_payouts}
+            info['continue_round'] = 0
+            info['rundown'] = 1
+            info['next_round'] = 0
+            info['single_nonfold_p'] = 0
 
         # only one not folded, so pay all pots to him.
         elif len(all_nonfold_p) == 1:
@@ -788,6 +799,10 @@ class PokerEnv:
                 self._payout_pots()
             else:  # more efficient, but doesnt give info needed.
                 self._pay_all_to_one_player(all_nonfold_p[0])
+            info['continue_round'] = 0
+            info['rundown'] = 0
+            info['next_round'] = 0
+            info['single_nonfold_p'] = 1
 
         else:
             raise RuntimeError("There seems to be an edge-case not built into this")
