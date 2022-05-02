@@ -170,7 +170,7 @@ class PokerEnv:
         self.current_player = None  # PokerPlayer instance of player currently having to get_action
         self.last_raiser = None  # PokerPlayer instance
         self.n_actions_this_episode = None  # Number of actions performed this episode
-
+        self.info = {'payouts': {}}
         # only relevant in Limit games
         self.n_raises_this_round = NotImplementedError
 
@@ -212,11 +212,11 @@ class PokerEnv:
                 _table_space.append(get_discrete(1, "last_action_what_" + str(i), next_idx))
 
             for i in range(
-                self.N_SEATS):  # ....................................................... self.last_action[2]
+                    self.N_SEATS):  # ....................................................... self.last_action[2]
                 _table_space.append(get_discrete(1, "last_action_who_" + str(i), next_idx))
 
             for i in range(
-                self.N_SEATS):  # ....................................................... curr_player.seat_id
+                    self.N_SEATS):  # ....................................................... curr_player.seat_id
                 _table_space.append(get_discrete(1, "p" + str(i) + "_acts_next", next_idx))
 
             for i in range(max(self.ALL_ROUNDS_LIST) + 1):  # ...................................... round onehot
@@ -470,11 +470,28 @@ class PokerEnv:
 
         if self.N_SEATS == 2:
             if self.seats[0].hand_rank > self.seats[1].hand_rank:
+                self.info['payouts'] = {0: self.main_pot}
+                if 0 in self.info['payouts']:
+                    self.info['payouts'][0] += self.main_pot
+                else:
+                    self.info['payouts'][0] = self.main_pot
                 self.seats[0].award(self.main_pot)
             elif self.seats[0].hand_rank < self.seats[1].hand_rank:
+                if 1 in self.info['payouts']:
+                    self.info['payouts'][1] += self.main_pot
+                else:
+                    self.info['payouts'][1] = self.main_pot
                 self.seats[1].award(self.main_pot)
             else:
                 # in HU the number of chips is always even because both players had to put the same amount in.
+                if 0 in self.info['payouts']:
+                    self.info['payouts'][0] += self.main_pot / 2
+                else:
+                    self.info['payouts'][0] = self.main_pot / 2
+                if 1 in self.info['payouts']:
+                    self.info['payouts'][1] += self.main_pot / 2
+                else:
+                    self.info['payouts'][1] = self.main_pot / 2
                 self.seats[0].award(self.main_pot / 2)
                 self.seats[1].award(self.main_pot / 2)
 
@@ -501,12 +518,20 @@ class PokerEnv:
                     num_non_div_chips = int(pot) % num_winners  # distribute afterwards
 
                     for p in winner_list:
+                        if p.seat_id in self.info['payouts']:
+                            self.info['payouts'] += {f'{p.seat_id}': chips_per_winner}
+                        else:
+                            self.info['payouts'] = {f'{p.seat_id}': chips_per_winner}
                         p.award(chips_per_winner)
 
                     # distribute the rest randomly.
                     shuffled_winner_idxs = np.arange(num_winners)
                     np.random.shuffle(shuffled_winner_idxs)
                     for p_idx in shuffled_winner_idxs[:num_non_div_chips]:
+                        if p_idx in self.info['payouts']:
+                            self.info['payouts'][p_idx] += 1
+                        else:
+                            self.info['payouts'][p_idx] = 1
                         self.seats[p_idx].award(1)
 
             # set all 0
@@ -521,12 +546,24 @@ class PokerEnv:
             player_to_pay_to (PokerPlayer)
         """
         for seat in self.seats:
+            if player_to_pay_to.seat_id in self.info['payouts']:
+                self.info['payouts'][player_to_pay_to.seat_id] += seat.current_bet
+            else:
+                self.info['payouts'][player_to_pay_to.seat_id] = seat.current_bet
             player_to_pay_to.award(seat.current_bet)
             seat.current_bet = 0
 
+        if player_to_pay_to.seat_id in self.info['payouts']:
+            self.info['payouts'][player_to_pay_to.seat_id] += sum(self.side_pots)
+        else:
+            self.info['payouts'][player_to_pay_to.seat_id] = sum(self.side_pots)
         player_to_pay_to.award(sum(self.side_pots))
         self.side_pots = [0] * self.N_SEATS
 
+        if player_to_pay_to.seat_id in self.info['payouts']:
+            self.info['payouts'][player_to_pay_to.seat_id] += self.main_pot
+        else:
+            self.info['payouts'][player_to_pay_to.seat_id] = self.main_pot
         player_to_pay_to.award(self.main_pot)
         self.main_pot = 0
 
@@ -587,7 +624,7 @@ class PokerEnv:
 
                         # and not self.seats[b_idx].folded_this_episode   is safe because a folded player can't
                         if ((next_bet_idx is None or current_bets[b_idx] < current_bets[next_bet_idx])
-                            and not self.seats[b_idx].folded_this_episode):
+                                and not self.seats[b_idx].folded_this_episode):
                             next_bet_idx = b_idx
 
                 return next_bet_idx
@@ -601,7 +638,7 @@ class PokerEnv:
                 side_pot_amount_per_player_in_it = self.seats[idx_smallest_bet].current_bet
 
                 players_not_all_in_after_this_cleanup = [p for p in self.seats if not (
-                    p.current_bet < side_pot_amount_per_player_in_it and p.is_allin)]
+                        p.current_bet < side_pot_amount_per_player_in_it and p.is_allin)]
 
                 for p in players_not_all_in_after_this_cleanup:
                     p.side_pot_rank = side_pot_idx
@@ -618,6 +655,7 @@ class PokerEnv:
                 idx_smallest_bet = _find_next_smallest_bet()  # get status after main pot calc
 
     def _rundown(self):
+        self.info['rundown'] = True
         while True:
             self.current_round += 1
 
@@ -648,12 +686,16 @@ class PokerEnv:
         Call this AFTER round+=1
         """
         if self.current_round == Poker.PREFLOP:
+            self.info['deal_next_hand'] = True
             self._deal_hole_cards()
         elif self.current_round == Poker.FLOP:
+            self.info['draw_next_stage'] = True
             self._deal_flop()
         elif self.current_round == Poker.TURN:
+            self.info['draw_next_stage'] = True
             self._deal_turn()
         elif self.current_round == Poker.RIVER:
+            self.info['draw_next_stage'] = True
             self._deal_river()
         else:
             raise ValueError(self.current_round)
@@ -743,8 +785,12 @@ class PokerEnv:
         all_non_all_in_and_non_fold_p = [p for p in self.seats if not p.folded_this_episode and not p.is_allin]
         all_nonfold_p = [p for p in self.seats if not p.folded_this_episode]
 
+        self.info = {'continue_round': True,
+                     'rundown': False,
+                     'deal_next_hand': False,
+                     'draw_next_round': False,
+                     'payouts': {}}
         # just let next player run in this round
-        info = {}
         if self._should_continue_in_this_round(all_non_all_in_and_non_fold_p=all_non_all_in_and_non_fold_p,
                                                all_nonfold_p=all_nonfold_p):
             self.current_player = self._get_player_that_has_to_act_next()
@@ -752,11 +798,8 @@ class PokerEnv:
 
             if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                 info = {"chance_acts": False, "state_dict_before_money_move": None}
-            info['continue_round'] = 1
-            # info['first_actor_next_stage'] = dont do it because of offset
-            info['rundown'] = 0
-            info['next_round'] = 0
-            info['single_nonfold_p'] = 0
+
+
         # next round
         elif len(all_non_all_in_and_non_fold_p) > 1:
 
@@ -766,29 +809,24 @@ class PokerEnv:
                 self._put_current_bets_into_main_pot_and_side_pots()
                 if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                     info = {"chance_acts": False, "state_dict_before_money_move": self.state_dict()}
-                self._payout_pots()
+                self._payout_pots()  # [x]
 
             # deal next round
             else:
                 is_terminal = False
                 if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                     info = {"chance_acts": True, "state_dict_before_money_move": self.state_dict()}
-                self._next_round()
-            info['continue_round'] = 0
-            info['rundown'] = 0
-            info['next_round'] = 1
-            info['single_nonfold_p'] = 0
-        # rundown
+                self._next_round()  # [x]
+
+
+
+        # rundown  [x]
         elif len(all_nonfold_p) > 1:  # rundown only makes sense if >0 are allin and 1 is not or >2 are allin.
             is_terminal = True
             state_before_payouts = self._rundown()
 
             if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                 info = {"chance_acts": False, "state_dict_before_money_move": state_before_payouts}
-            info['continue_round'] = 0
-            info['rundown'] = 1
-            info['next_round'] = 0
-            info['single_nonfold_p'] = 0
 
         # only one not folded, so pay all pots to him.
         elif len(all_nonfold_p) == 1:
@@ -796,18 +834,15 @@ class PokerEnv:
             if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                 self._put_current_bets_into_main_pot_and_side_pots()
                 info = {"chance_acts": False, "state_dict_before_money_move": self.state_dict()}
-                self._payout_pots()
+                self._payout_pots()  # [x]
             else:  # more efficient, but doesnt give info needed.
-                self._pay_all_to_one_player(all_nonfold_p[0])
-            info['continue_round'] = 0
-            info['rundown'] = 0
-            info['next_round'] = 0
-            info['single_nonfold_p'] = 1
+                self._pay_all_to_one_player(all_nonfold_p[0])  # [x]
+
 
         else:
             raise RuntimeError("There seems to be an edge-case not built into this")
 
-        return self._get_current_step_returns(is_terminal=is_terminal, info=info)
+        return self._get_current_step_returns(is_terminal=is_terminal, info=self.info)
 
     # _____________________________________________________ UTIL  ______________________________________________________
     def _get_winner_list(self, players_to_consider):
@@ -928,8 +963,8 @@ class PokerEnv:
 
         elif _action_idx == Poker.CHECK_CALL:
             if (self.FIRST_ACTION_NO_CALL
-                and (self.n_actions_this_episode == 0)
-                and self.current_round == Poker.PREFLOP):
+                    and (self.n_actions_this_episode == 0)
+                    and self.current_round == Poker.PREFLOP):
                 return [Poker.FOLD, -1]
 
             return self._process_check_call(total_to_call=total_to_call)
@@ -942,7 +977,7 @@ class PokerEnv:
                     return self._process_check_call(total_to_call=total_to_call)
 
             if ((self.current_player.stack + self.current_player.current_bet <= total_to_call)
-                or (self.capped_raise.player_that_cant_reopen is self.current_player)):
+                    or (self.capped_raise.player_that_cant_reopen is self.current_player)):
                 return self._process_check_call(total_to_call=total_to_call)
             else:
                 return self._process_raise(raise_total_amount_in_chips=action[1])
@@ -970,7 +1005,7 @@ class PokerEnv:
 
         largest_bet = max([p.current_bet for p in self.seats])
         if len([p for p in all_nonfold_p if p.is_allin or p.current_bet == largest_bet]) == len(all_nonfold_p) \
-            and len([p for p in all_non_all_in_and_non_fold_p if not p.has_acted_this_round]) == 0:
+                and len([p for p in all_non_all_in_and_non_fold_p if not p.has_acted_this_round]) == 0:
             return False
         return True
 
