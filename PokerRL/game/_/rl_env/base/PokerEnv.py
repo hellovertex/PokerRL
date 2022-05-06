@@ -687,15 +687,27 @@ class PokerEnv:
         """
         if self.current_round == Poker.PREFLOP:
             self.info['deal_next_hand'] = True
+            self.info['draw_next_stage'] = False
+            self.info['continue_round'] = False
+            self.info['rundown'] = False
             self._deal_hole_cards()
         elif self.current_round == Poker.FLOP:
             self.info['draw_next_stage'] = True
+            self.info['deal_next_hand'] = False
+            self.info['continue_round'] = True
+            self.info['rundown'] = False
             self._deal_flop()
         elif self.current_round == Poker.TURN:
             self.info['draw_next_stage'] = True
+            self.info['deal_next_hand'] = False
+            self.info['continue_round'] = True
+            self.info['rundown'] = False
             self._deal_turn()
         elif self.current_round == Poker.RIVER:
             self.info['draw_next_stage'] = True
+            self.info['deal_next_hand'] = False
+            self.info['continue_round'] = True
+            self.info['rundown'] = False
             self._deal_river()
         else:
             raise ValueError(self.current_round)
@@ -788,7 +800,7 @@ class PokerEnv:
         self.info = {'continue_round': True,
                      'rundown': False,
                      'deal_next_hand': False,
-                     'draw_next_round': False,
+                     'draw_next_stage': False,
                      'payouts': {}}
         # just let next player run in this round
         if self._should_continue_in_this_round(all_non_all_in_and_non_fold_p=all_non_all_in_and_non_fold_p,
@@ -810,7 +822,10 @@ class PokerEnv:
                 if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                     info = {"chance_acts": False, "state_dict_before_money_move": self.state_dict()}
                 self._payout_pots()  # [x]
-
+                self.info['continue_round'] = False
+                self.info['rundown'] = False
+                self.info['deal_next_hand'] = True
+                self.info['draw_next_stage'] = False
             # deal next round
             else:
                 is_terminal = False
@@ -827,7 +842,10 @@ class PokerEnv:
 
             if self.RETURN_PRE_TRANSITION_STATE_IN_INFO:
                 info = {"chance_acts": False, "state_dict_before_money_move": state_before_payouts}
-
+            self.info['continue_round'] = False
+            self.info['rundown'] = True
+            self.info['deal_next_hand'] = False
+            self.info['draw_next_stage'] = False
         # only one not folded, so pay all pots to him.
         elif len(all_nonfold_p) == 1:
             is_terminal = True
@@ -837,6 +855,10 @@ class PokerEnv:
                 self._payout_pots()  # [x]
             else:  # more efficient, but doesnt give info needed.
                 self._pay_all_to_one_player(all_nonfold_p[0])  # [x]
+            self.info['continue_round'] = False
+            self.info['rundown'] = False
+            self.info['deal_next_hand'] = True
+            self.info['draw_next_stage'] = False
 
 
         else:
@@ -1013,7 +1035,8 @@ class PokerEnv:
     def _get_current_step_returns(self, is_terminal, info):
         obs = self.get_current_obs(is_terminal)
         reward = self._get_step_reward(is_terminal)
-        return obs, reward, is_terminal, info
+
+        return obs, reward, is_terminal, self.info
 
     def _get_player_states_all_players(self, normalization_sum):
         """ Public Information About Each Player """
@@ -1584,6 +1607,9 @@ class PokerEnv:
 
     def set_args(self, env_args):
         self._init_from_args(env_args=env_args, is_evaluating=self.IS_EVALUATING)
+
+    def get_info(self):
+        return self.info
 
 
 class CappedRaise:
