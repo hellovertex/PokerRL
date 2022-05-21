@@ -378,6 +378,7 @@ class PokerEnv:
                          else self.DEFAULT_STACK_SIZE),
                         stack_randomization_range=a.stack_randomization_range)
             for i in range(a.n_seats)]
+        self.observation_space, self.obs_idx_dict, self.obs_parts_idxs_dict = self._construct_obs_space()
 
     # __________________________________________________ TO OVERRIDE ___________________________________________________
     def get_hand_rank(self, hand_2d, board_2d):
