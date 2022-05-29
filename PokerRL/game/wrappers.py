@@ -13,6 +13,7 @@ from PokerRL.game._.wrappers.FlatHULimitPokerHistoryWrapper import \
     FlatHULimitPokerHistoryWrapper as _FlatHULimitPokerHistoryWrapper
 from PokerRL.game._.wrappers.RecurrentHistoryWrapper import RecurrentHistoryWrapper as _RecurrentHistoryWrapper
 from PokerRL.game._.wrappers.Vanilla import VanillaWrapper as _VanillaWrapper
+from PokerRL.game._.wrappers.htp_wrappers import *
 
 
 class VanillaEnvBuilder(_EnvWrapperBuilderBase):
