@@ -1,8 +1,11 @@
-# Added Custom Environment Wrappers and an observation vectorizer to Eric Steinbergers Env (see Original README below)
-I added an Action History Wrapper and an AugmentationObservationWrapper that uses a custom vectorizer to 
-generate observations that include the action history and other things.
+# Fork From Eric Steinbergers PokerRL env
 
-# ------------------------ Original README from Eric Steinberger -----------------------------
+I added Custom Environment Wrappers and an observation vectorizer to Eric Steinbergers Env:
+ - Action History Wrapper 
+ - AugmentationObservationWrapper that uses a 
+ - custom vectorizer to generate observations that include the action history and other things.
+
+# *Original README from Eric Steinberger below:* 
 # PokerRL
 
 Framework for Multi-Agent Deep Reinforcement Learning in Poker games.
