@@ -3,8 +3,8 @@
 
 import numpy as np
 
-from PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
-from PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
+from prl.environment.steinberger.PokerRL.rl import rl_util
 
 
 class LocalHead2HeadMaster(EvaluatorMasterBase):

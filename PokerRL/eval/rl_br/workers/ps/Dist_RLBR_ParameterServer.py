@@ -3,7 +3,7 @@
 
 import ray
 
-from PokerRL.eval.rl_br.workers.ps.Local_RLBR_ParameterServer import Local_RLBR_ParameterServer as _LocalPS
+from prl.environment.steinberger.PokerRL.eval.rl_br.workers.ps.Local_RLBR_ParameterServer import Local_RLBR_ParameterServer as _LocalPS
 
 
 @ray.remote(num_cpus=1)

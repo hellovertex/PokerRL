@@ -4,7 +4,7 @@
 import torch
 import torch.nn as nn
 
-from PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.rl import rl_util
 
 
 class MainPokerModuleRNN(nn.Module):

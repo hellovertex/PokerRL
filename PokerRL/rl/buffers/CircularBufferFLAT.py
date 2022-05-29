@@ -3,7 +3,7 @@
 
 import torch
 
-from PokerRL.rl.buffers._circular_base import CircularBufferBase
+from prl.environment.steinberger.PokerRL.rl.buffers._circular_base import CircularBufferBase
 
 
 class CircularBufferFLAT(CircularBufferBase):

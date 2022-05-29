@@ -1,6 +1,6 @@
-from PokerRL.game._.rl_env.poker_types.DiscretizedPokerEnv import DiscretizedPokerEnv
-from PokerRL.game._.rl_env.poker_types.LimitPokerEnv import LimitPokerEnv
-from PokerRL.rl.rl_util import get_builder_from_str, get_env_cls_from_str
+from prl.environment.steinberger.PokerRL.game._.rl_env.poker_types.DiscretizedPokerEnv import DiscretizedPokerEnv
+from prl.environment.steinberger.PokerRL.game._.rl_env.poker_types.LimitPokerEnv import LimitPokerEnv
+from prl.environment.steinberger.PokerRL.rl.rl_util import get_builder_from_str, get_env_cls_from_str
 
 
 def get_env_builder_rlbr(t_prof):

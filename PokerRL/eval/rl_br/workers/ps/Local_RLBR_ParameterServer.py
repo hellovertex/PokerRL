@@ -5,11 +5,11 @@ import os
 
 import psutil
 
-from PokerRL.eval.rl_br import _util
-from PokerRL.rl import rl_util
-from PokerRL.rl.agent_modules.DDQN import DDQN
-from PokerRL.rl.base_cls.workers.ParameterServerBase import ParameterServerBase as _ParameterServerBase
-from PokerRL.rl.neural.DuelingQNet import DuelingQNet
+from prl.environment.steinberger.PokerRL.eval.rl_br import _util
+from prl.environment.steinberger.PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.rl.agent_modules.DDQN import DDQN
+from prl.environment.steinberger.PokerRL.rl.base_cls.workers.ParameterServerBase import ParameterServerBase as _ParameterServerBase
+from prl.environment.steinberger.PokerRL.rl.neural.DuelingQNet import DuelingQNet
 
 
 class Local_RLBR_ParameterServer(_ParameterServerBase):

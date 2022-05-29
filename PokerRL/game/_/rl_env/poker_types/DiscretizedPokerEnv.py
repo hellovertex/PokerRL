@@ -5,9 +5,9 @@ import time
 
 import numpy as np
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game._.rl_env.base.PokerEnv import PokerEnv as _PokerEnv
-from PokerRL.game.poker_env_args import DiscretizedPokerEnvArgs
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game._.rl_env.base.PokerEnv import PokerEnv as _PokerEnv
+from prl.environment.steinberger.PokerRL.game.poker_env_args import DiscretizedPokerEnvArgs
 
 
 class DiscretizedPokerEnv(_PokerEnv):

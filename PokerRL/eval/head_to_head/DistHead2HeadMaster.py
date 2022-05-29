@@ -9,7 +9,7 @@ The H2H computation itself is not distributed.
 import ray
 import torch
 
-from PokerRL.eval.head_to_head.LocalHead2HeadMaster import LocalHead2HeadMaster as LocalEvalHead2HeadMaster
+from prl.environment.steinberger.PokerRL.eval.head_to_head.LocalHead2HeadMaster import LocalHead2HeadMaster as LocalEvalHead2HeadMaster
 
 
 @ray.remote(num_cpus=1, num_gpus=1 if torch.cuda.is_available() else 0)

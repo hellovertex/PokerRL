@@ -3,7 +3,7 @@
 
 import ray
 
-from PokerRL.eval.rl_br.workers.la.Local_RLBR_LearnerActor import Local_RLBR_LearnerActor as _LocalLA
+from prl.environment.steinberger.PokerRL.eval.rl_br.workers.la.Local_RLBR_LearnerActor import Local_RLBR_LearnerActor as _LocalLA
 
 
 @ray.remote(num_cpus=1)

@@ -1,7 +1,7 @@
 # Copyright (c) 2019 Eric Steinberger
 
 
-from PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
+from prl.environment.steinberger.PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
 
 
 class ChiefBase(WorkerBase):

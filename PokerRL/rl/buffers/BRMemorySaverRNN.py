@@ -3,8 +3,8 @@
 
 import numpy as np
 
-from PokerRL.rl import rl_util
-from PokerRL.rl.buffers._circular_base import BRMemorySaverBase
+from prl.environment.steinberger.PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.rl.buffers._circular_base import BRMemorySaverBase
 
 
 class _GameForBR:

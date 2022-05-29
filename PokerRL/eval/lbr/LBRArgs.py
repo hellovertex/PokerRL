@@ -3,8 +3,8 @@
 
 import copy
 
-from PokerRL.game import bet_sets
-from PokerRL.game.poker_env_args import DiscretizedPokerEnvArgs, LimitPokerEnvArgs, NoLimitPokerEnvArgs
+from prl.environment.steinberger.PokerRL.game import bet_sets
+from prl.environment.steinberger.PokerRL.game.poker_env_args import DiscretizedPokerEnvArgs, LimitPokerEnvArgs, NoLimitPokerEnvArgs
 
 
 class LBRArgs:

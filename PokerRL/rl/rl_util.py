@@ -7,8 +7,8 @@ Utility functions for RL
 import numpy as np
 import torch
 
-from PokerRL.game.games import ALL_ENVS
-from PokerRL.game.wrappers import ALL_BUILDERS
+from prl.environment.steinberger.PokerRL.game.games import ALL_ENVS
+from prl.environment.steinberger.PokerRL.game.wrappers import ALL_BUILDERS
 
 
 def polynomial_decay(base, const, counter, exponent, minimum=0):

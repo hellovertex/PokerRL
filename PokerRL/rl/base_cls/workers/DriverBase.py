@@ -4,9 +4,9 @@
 import shutil
 from os.path import join as ospj
 
-from PokerRL._.CrayonWrapper import CrayonWrapper
-from PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
-from PokerRL.util import file_util
+from prl.environment.steinberger.PokerRL._.CrayonWrapper import CrayonWrapper
+from prl.environment.steinberger.PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
+from prl.environment.steinberger.PokerRL.util import file_util
 
 
 class DriverBase(WorkerBase):
@@ -41,25 +41,25 @@ class DriverBase(WorkerBase):
         self._name_to_import = name_to_import
 
         if self._t_prof.DISTRIBUTED:
-            from PokerRL.eval.lbr.DistLBRMaster import DistLBRMaster as LBRMaster
-            from PokerRL.eval.rl_br.DistRLBRMaster import DistRLBRMaster as RLBRMaster
-            from PokerRL.eval.rl_br.workers.ps.Dist_RLBR_ParameterServer import \
+            from prl.environment.steinberger.PokerRL.eval.lbr.DistLBRMaster import DistLBRMaster as LBRMaster
+            from prl.environment.steinberger.PokerRL.eval.rl_br.DistRLBRMaster import DistRLBRMaster as RLBRMaster
+            from prl.environment.steinberger.PokerRL.eval.rl_br.workers.ps.Dist_RLBR_ParameterServer import \
                 Dist_RLBR_ParameterServer as RLBRParameterServer
-            from PokerRL.eval.rl_br.workers.la.Dist_RLBR_LearnerActor import Dist_RLBR_LearnerActor as RLBRLearnerActor
-            from PokerRL.eval.lbr.DistLBRWorker import DistLBRWorker as LBRWorker
-            from PokerRL.eval.br.DistBRMaster import DistBRMaster as BRMaster
-            from PokerRL.eval.head_to_head.DistHead2HeadMaster import DistHead2HeadMaster as Head2HeadMaster
+            from prl.environment.steinberger.PokerRL.eval.rl_br.workers.la.Dist_RLBR_LearnerActor import Dist_RLBR_LearnerActor as RLBRLearnerActor
+            from prl.environment.steinberger.PokerRL.eval.lbr.DistLBRWorker import DistLBRWorker as LBRWorker
+            from prl.environment.steinberger.PokerRL.eval.br.DistBRMaster import DistBRMaster as BRMaster
+            from prl.environment.steinberger.PokerRL.eval.head_to_head.DistHead2HeadMaster import DistHead2HeadMaster as Head2HeadMaster
 
         else:
-            from PokerRL.eval.lbr.LocalLBRMaster import LocalLBRMaster as LBRMaster
-            from PokerRL.eval.rl_br.LocalRLBRMaster import LocalRLBRMaster as RLBRMaster
-            from PokerRL.eval.rl_br.workers.ps.Local_RLBR_ParameterServer import \
+            from prl.environment.steinberger.PokerRL.eval.lbr.LocalLBRMaster import LocalLBRMaster as LBRMaster
+            from prl.environment.steinberger.PokerRL.eval.rl_br.LocalRLBRMaster import LocalRLBRMaster as RLBRMaster
+            from prl.environment.steinberger.PokerRL.eval.rl_br.workers.ps.Local_RLBR_ParameterServer import \
                 Local_RLBR_ParameterServer as RLBRParameterServer
-            from PokerRL.eval.rl_br.workers.la.Local_RLBR_LearnerActor import \
+            from prl.environment.steinberger.PokerRL.eval.rl_br.workers.la.Local_RLBR_LearnerActor import \
                 Local_RLBR_LearnerActor as RLBRLearnerActor
-            from PokerRL.eval.lbr.LocalLBRWorker import LocalLBRWorker as LBRWorker
-            from PokerRL.eval.br.LocalBRMaster import LocalBRMaster as BRMaster
-            from PokerRL.eval.head_to_head.LocalHead2HeadMaster import LocalHead2HeadMaster as Head2HeadMaster
+            from prl.environment.steinberger.PokerRL.eval.lbr.LocalLBRWorker import LocalLBRWorker as LBRWorker
+            from prl.environment.steinberger.PokerRL.eval.br.LocalBRMaster import LocalBRMaster as BRMaster
+            from prl.environment.steinberger.PokerRL.eval.head_to_head.LocalHead2HeadMaster import LocalHead2HeadMaster as Head2HeadMaster
 
         # safety measure to avoid overwriting logs when reloading
         if name_to_import is not None and iteration_to_import is not None and name_to_import == t_prof.name:

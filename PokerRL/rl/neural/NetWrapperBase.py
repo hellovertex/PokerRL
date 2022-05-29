@@ -3,7 +3,7 @@
 
 import torch
 
-from PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.rl import rl_util
 
 
 class NetWrapperBase:

@@ -5,8 +5,8 @@ from os.path import join as ospj
 
 from pycrayon import CrayonClient
 
-from PokerRL.rl.MaybeRay import MaybeRay
-from PokerRL.util.file_util import create_dir_if_not_exist, write_dict_to_file_json
+from prl.environment.steinberger.PokerRL.rl.MaybeRay import MaybeRay
+from prl.environment.steinberger.PokerRL.util.file_util import create_dir_if_not_exist, write_dict_to_file_json
 
 
 class CrayonWrapper:

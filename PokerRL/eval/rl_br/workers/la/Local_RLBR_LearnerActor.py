@@ -1,9 +1,9 @@
 import numpy as np
 
-from PokerRL.eval.rl_br import _util
-from PokerRL.rl import rl_util
-from PokerRL.rl.agent_modules.DDQN import DDQN
-from PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
+from prl.environment.steinberger.PokerRL.eval.rl_br import _util
+from prl.environment.steinberger.PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.rl.agent_modules.DDQN import DDQN
+from prl.environment.steinberger.PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
 
 
 class Local_RLBR_LearnerActor(WorkerBase):
@@ -27,14 +27,14 @@ class Local_RLBR_LearnerActor(WorkerBase):
         self._br_memory_saver = None
 
         if t_prof.nn_type == "recurrent":
-            from PokerRL.rl.buffers.CircularBufferRNN import CircularBufferRNN
-            from PokerRL.rl.buffers.BRMemorySaverRNN import BRMemorySaverRNN
+            from prl.environment.steinberger.PokerRL.rl.buffers.CircularBufferRNN import CircularBufferRNN
+            from prl.environment.steinberger.PokerRL.rl.buffers.BRMemorySaverRNN import BRMemorySaverRNN
 
             self.CircularBufferCls = CircularBufferRNN
             self.BRMemorySaverCls = BRMemorySaverRNN
         elif t_prof.nn_type == "feedforward":
-            from PokerRL.rl.buffers.CircularBufferFLAT import CircularBufferFLAT
-            from PokerRL.rl.buffers.BRMemorySaverFLAT import BRMemorySaverFLAT
+            from prl.environment.steinberger.PokerRL.rl.buffers.CircularBufferFLAT import CircularBufferFLAT
+            from prl.environment.steinberger.PokerRL.rl.buffers.BRMemorySaverFLAT import BRMemorySaverFLAT
 
             self.CircularBufferCls = CircularBufferFLAT
             self.BRMemorySaverCls = BRMemorySaverFLAT

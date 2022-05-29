@@ -3,9 +3,9 @@
 
 import numpy as np
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
-from PokerRL.game._.tree._.nodes import PlayerActionNode
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
+from prl.environment.steinberger.PokerRL.game._.tree._.nodes import PlayerActionNode
 
 
 class ValueFiller:

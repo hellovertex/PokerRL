@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
+from prl.environment.steinberger.PokerRL.rl.base_cls.workers.WorkerBase import WorkerBase
 
 
 class EvaluatorMasterBase(WorkerBase):

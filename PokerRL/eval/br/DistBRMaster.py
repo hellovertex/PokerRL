@@ -9,7 +9,7 @@ is not distributed.
 import ray
 import torch
 
-from PokerRL.eval.br.LocalBRMaster import LocalBRMaster as LocalEvalBRMaster
+from prl.environment.steinberger.PokerRL.eval.br.LocalBRMaster import LocalBRMaster as LocalEvalBRMaster
 
 
 @ray.remote(num_cpus=1, num_gpus=1 if torch.cuda.is_available() else 0)

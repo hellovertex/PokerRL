@@ -4,9 +4,9 @@
 import numpy as np
 from scipy.special import comb
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game.PokerRange import PokerRange
-from PokerRL.game._.cpp_wrappers.CppLUT import CppLibHoldemLuts
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game.PokerRange import PokerRange
+from prl.environment.steinberger.PokerRL.game._.cpp_wrappers.CppLUT import CppLibHoldemLuts
 
 
 class _LutGetterBase:

@@ -5,8 +5,8 @@ import copy
 
 import numpy as np
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game._.wrappers._Wrapper import Wrapper
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game._.wrappers._Wrapper import Wrapper
 
 
 class FlatHULimitPokerHistoryWrapper(Wrapper):

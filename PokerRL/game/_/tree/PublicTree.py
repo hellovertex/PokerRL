@@ -7,12 +7,12 @@ import os
 
 import numpy as np
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs, PlayerDictIdxs
-from PokerRL.game._.tree._.StrategyFiller import StrategyFiller
-from PokerRL.game._.tree._.ValueFiller import ValueFiller
-from PokerRL.game._.tree._.nodes import PlayerActionNode, ChanceNode
-from PokerRL.util import file_util
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs, PlayerDictIdxs
+from prl.environment.steinberger.PokerRL.game._.tree._.StrategyFiller import StrategyFiller
+from prl.environment.steinberger.PokerRL.game._.tree._.ValueFiller import ValueFiller
+from prl.environment.steinberger.PokerRL.game._.tree._.nodes import PlayerActionNode, ChanceNode
+from prl.environment.steinberger.PokerRL.util import file_util
 
 
 class PublicTree:

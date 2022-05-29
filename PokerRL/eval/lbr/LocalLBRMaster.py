@@ -7,8 +7,8 @@ logging and provides an interface to the LBR computation.
 """
 import numpy as np
 
-from PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
-from PokerRL.eval.lbr import _util
+from prl.environment.steinberger.PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
+from prl.environment.steinberger.PokerRL.eval.lbr import _util
 
 
 class LocalLBRMaster(EvaluatorMasterBase):

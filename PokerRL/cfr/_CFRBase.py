@@ -5,9 +5,9 @@ import copy
 
 import numpy as np
 
-from PokerRL.game._.tree.PublicTree import PublicTree
-from PokerRL.game.wrappers import HistoryEnvBuilder
-from PokerRL.rl.rl_util import get_env_cls_from_str
+from prl.environment.steinberger.PokerRL.game._.tree.PublicTree import PublicTree
+from prl.environment.steinberger.PokerRL.game.wrappers import HistoryEnvBuilder
+from prl.environment.steinberger.PokerRL.rl.rl_util import get_env_cls_from_str
 
 
 class CFRBase:

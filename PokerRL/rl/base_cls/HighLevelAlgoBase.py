@@ -1,7 +1,7 @@
 # Copyright (c) 2019 Eric Steinberger
 
 
-from PokerRL.rl.MaybeRay import MaybeRay
+from prl.environment.steinberger.PokerRL.rl.MaybeRay import MaybeRay
 
 
 class HighLevelAlgoBase:

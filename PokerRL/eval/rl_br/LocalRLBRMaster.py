@@ -5,9 +5,9 @@ import copy
 
 import numpy as np
 
-from PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
-from PokerRL.eval.rl_br import _util
-from PokerRL.rl.agent_modules.DDQN import DDQN
+from prl.environment.steinberger.PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
+from prl.environment.steinberger.PokerRL.eval.rl_br import _util
+from prl.environment.steinberger.PokerRL.rl.agent_modules.DDQN import DDQN
 
 
 class LocalRLBRMaster(EvaluatorMasterBase):

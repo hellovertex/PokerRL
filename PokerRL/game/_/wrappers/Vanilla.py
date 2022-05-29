@@ -1,7 +1,7 @@
 # Copyright (c) 2019 Eric Steinberger
 
 
-from PokerRL.game._.wrappers._Wrapper import Wrapper
+from prl.environment.steinberger.PokerRL.game._.wrappers._Wrapper import Wrapper
 
 
 class VanillaWrapper(Wrapper):

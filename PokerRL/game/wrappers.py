@@ -7,13 +7,14 @@ env_builder interface. Creating an env_builder is your starting point to create 
 (potentially with a wrapper).
 """
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game._.EnvWrapperBuilderBase import EnvWrapperBuilderBase as _EnvWrapperBuilderBase
-from PokerRL.game._.wrappers.FlatHULimitPokerHistoryWrapper import \
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game._.EnvWrapperBuilderBase import \
+    EnvWrapperBuilderBase as _EnvWrapperBuilderBase
+from prl.environment.steinberger.PokerRL.game._.wrappers.FlatHULimitPokerHistoryWrapper import \
     FlatHULimitPokerHistoryWrapper as _FlatHULimitPokerHistoryWrapper
-from PokerRL.game._.wrappers.RecurrentHistoryWrapper import RecurrentHistoryWrapper as _RecurrentHistoryWrapper
-from PokerRL.game._.wrappers.Vanilla import VanillaWrapper as _VanillaWrapper
-from PokerRL.game._.wrappers.htp_wrappers import *
+from prl.environment.steinberger.PokerRL.game._.wrappers.RecurrentHistoryWrapper import \
+    RecurrentHistoryWrapper as _RecurrentHistoryWrapper
+from prl.environment.steinberger.PokerRL.game._.wrappers.Vanilla import VanillaWrapper as _VanillaWrapper
 
 
 class VanillaEnvBuilder(_EnvWrapperBuilderBase):
@@ -44,7 +45,7 @@ class FlatLimitPokerEnvBuilder(_EnvWrapperBuilderBase):
         for r in env_cls.RULES.ALL_ROUNDS_LIST:
             self._VEC_ROUND_OFFSETS[r] = self.action_vector_size
             self._VEC_HALF_ROUND_SIZE[r] = len([Poker.BET_RAISE, Poker.CHECK_CALL]) * (
-                env_cls.MAX_N_RAISES_PER_ROUND[r] + 2)
+                    env_cls.MAX_N_RAISES_PER_ROUND[r] + 2)
             self.action_vector_size += self._VEC_HALF_ROUND_SIZE[r] * env_args.n_seats  # always 2 seats
 
         super().__init__(env_cls=env_cls, env_args=env_args)

@@ -1,7 +1,7 @@
 # Copyright (c) 2019 Eric Steinberger
 
 
-from PokerRL.rl.rl_util import get_builder_from_str, get_env_cls_from_str
+from prl.environment.steinberger.PokerRL.rl.rl_util import get_builder_from_str, get_env_cls_from_str
 
 
 def get_env_builder_lbr(t_prof):

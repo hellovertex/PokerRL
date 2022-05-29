@@ -4,9 +4,9 @@
 import numpy as np
 import torch
 
-from PokerRL.eval.lbr import _util
-from PokerRL.game.Poker import Poker
-from PokerRL.game.PokerRange import PokerRange
+from prl.environment.steinberger.PokerRL.eval.lbr import _util
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game.PokerRange import PokerRange
 
 
 class LocalLBRWorker:

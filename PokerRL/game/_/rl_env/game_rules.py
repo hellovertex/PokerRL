@@ -3,8 +3,8 @@
 
 import numpy as np
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game.PokerRange import PokerRange
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game.PokerRange import PokerRange
 
 """
 classes in this file are utilities that poker environments based on PokerEnv can inherit from. They override PokerEnv's
@@ -76,7 +76,7 @@ class LeducRules:
 
     @classmethod
     def get_lut_holder(cls):
-        from PokerRL.game._.look_up_table import LutHolderLeduc
+        from prl.environment.steinberger.PokerRL.game._.look_up_table import LutHolderLeduc
 
         return LutHolderLeduc(cls)
 
@@ -141,7 +141,7 @@ class BigLeducRules:
 
     @classmethod
     def get_lut_holder(cls):
-        from PokerRL.game._.look_up_table import LutHolderLeduc
+        from prl.environment.steinberger.PokerRL.game._.look_up_table import LutHolderLeduc
 
         return LutHolderLeduc(cls)
 
@@ -206,7 +206,7 @@ class HoldemRules:
     STRING = "HOLDEM_RULES"
 
     def __init__(self):
-        from PokerRL.game._.cpp_wrappers.CppHandeval import CppHandeval
+        from prl.environment.steinberger.PokerRL.game._.cpp_wrappers.CppHandeval import CppHandeval
 
         self._clib = CppHandeval()
 
@@ -224,7 +224,7 @@ class HoldemRules:
 
     @classmethod
     def get_lut_holder(cls):
-        from PokerRL.game._.look_up_table import LutHolderHoldem
+        from prl.environment.steinberger.PokerRL.game._.look_up_table import LutHolderHoldem
 
         return LutHolderHoldem(cls)
 
@@ -289,7 +289,7 @@ class FlopHoldemRules:
     STRING = "FLOP_HOLDEM_RULES"
 
     def __init__(self):
-        from PokerRL.game._.cpp_wrappers.CppHandeval import CppHandeval
+        from prl.environment.steinberger.PokerRL.game._.cpp_wrappers.CppHandeval import CppHandeval
 
         self._clib = CppHandeval()
 
@@ -307,6 +307,6 @@ class FlopHoldemRules:
 
     @classmethod
     def get_lut_holder(cls):
-        from PokerRL.game._.look_up_table import LutHolderHoldem
+        from prl.environment.steinberger.PokerRL.game._.look_up_table import LutHolderHoldem
 
         return LutHolderHoldem(cls)

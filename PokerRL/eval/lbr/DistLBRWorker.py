@@ -9,7 +9,7 @@ as you want to accelerate the LBR computation; the EvalLBRMaster will manage the
 import ray
 import torch
 
-from PokerRL.eval.lbr.LocalLBRWorker import LocalLBRWorker as LocalEvalLBRWorker
+from prl.environment.steinberger.PokerRL.eval.lbr.LocalLBRWorker import LocalLBRWorker as LocalEvalLBRWorker
 
 
 @ray.remote(num_cpus=1, num_gpus=1 if torch.cuda.is_available() else 0)

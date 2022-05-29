@@ -1,9 +1,9 @@
 # Copyright (c) 2019 Eric Steinberger
 
 
-from PokerRL.rl import rl_util
-from PokerRL.rl.MaybeRay import MaybeRay
-from PokerRL.util.file_util import do_pickle, load_pickle
+from prl.environment.steinberger.PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.rl.MaybeRay import MaybeRay
+from prl.environment.steinberger.PokerRL.util.file_util import do_pickle, load_pickle
 
 
 class EvalAgentBase:

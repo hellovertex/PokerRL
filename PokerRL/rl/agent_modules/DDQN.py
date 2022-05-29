@@ -4,10 +4,10 @@
 import numpy as np
 import torch
 
-from PokerRL.rl import rl_util
-from PokerRL.rl.neural.DuelingQNet import DuelingQNet
-from PokerRL.rl.neural.NetWrapperBase import NetWrapperArgsBase as _NetWrapperArgsBase
-from PokerRL.rl.neural.NetWrapperBase import NetWrapperBase as _NetWrapperBase
+from prl.environment.steinberger.PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.rl.neural.DuelingQNet import DuelingQNet
+from prl.environment.steinberger.PokerRL.rl.neural.NetWrapperBase import NetWrapperArgsBase as _NetWrapperArgsBase
+from prl.environment.steinberger.PokerRL.rl.neural.NetWrapperBase import NetWrapperBase as _NetWrapperBase
 
 
 class DDQN(_NetWrapperBase):

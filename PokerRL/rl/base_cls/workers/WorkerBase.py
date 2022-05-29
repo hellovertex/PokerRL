@@ -3,8 +3,8 @@
 
 from os.path import join as ospj
 
-from PokerRL.rl.MaybeRay import MaybeRay
-from PokerRL.util import file_util
+from prl.environment.steinberger.PokerRL.rl.MaybeRay import MaybeRay
+from prl.environment.steinberger.PokerRL.util import file_util
 
 
 class WorkerBase:

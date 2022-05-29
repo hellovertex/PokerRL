@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
 
 
 class PokerRange:

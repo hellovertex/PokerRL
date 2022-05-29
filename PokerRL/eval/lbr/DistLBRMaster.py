@@ -7,7 +7,7 @@ manage distributed LBRWorkers to compute the local best response approximation f
 """
 import ray
 
-from PokerRL.eval.lbr.LocalLBRMaster import LocalLBRMaster as _LocalEvalLBRMaster
+from prl.environment.steinberger.PokerRL.eval.lbr.LocalLBRMaster import LocalLBRMaster as _LocalEvalLBRMaster
 
 
 @ray.remote(num_cpus=1)

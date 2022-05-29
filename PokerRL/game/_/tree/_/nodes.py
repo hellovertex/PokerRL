@@ -2,7 +2,7 @@
 # Inspiration of architecture from DeepStack-Leduc (https://github.com/lifrordi/DeepStack-Leduc/tree/master/Source)
 
 
-from PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
+from prl.environment.steinberger.PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
 
 
 class NodeBase:

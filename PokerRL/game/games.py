@@ -5,11 +5,11 @@
 A collection of Poker games often used in computational poker research.
 """
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game._.rl_env.game_rules import HoldemRules, LeducRules, FlopHoldemRules, BigLeducRules
-from PokerRL.game._.rl_env.poker_types.DiscretizedPokerEnv import DiscretizedPokerEnv
-from PokerRL.game._.rl_env.poker_types.LimitPokerEnv import LimitPokerEnv
-from PokerRL.game._.rl_env.poker_types.NoLimitPokerEnv import NoLimitPokerEnv
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game._.rl_env.game_rules import HoldemRules, LeducRules, FlopHoldemRules, BigLeducRules
+from prl.environment.steinberger.PokerRL.game._.rl_env.poker_types.DiscretizedPokerEnv import DiscretizedPokerEnv
+from prl.environment.steinberger.PokerRL.game._.rl_env.poker_types.LimitPokerEnv import LimitPokerEnv
+from prl.environment.steinberger.PokerRL.game._.rl_env.poker_types.NoLimitPokerEnv import NoLimitPokerEnv
 
 
 # """""""""""""""

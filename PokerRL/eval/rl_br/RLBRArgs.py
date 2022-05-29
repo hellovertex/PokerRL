@@ -3,9 +3,9 @@
 
 import copy
 
-from PokerRL.game.poker_env_args import DiscretizedPokerEnvArgs, LimitPokerEnvArgs, NoLimitPokerEnvArgs
-from PokerRL.rl.agent_modules.DDQN import DDQNArgs
-from PokerRL.rl.neural.DuelingQNet import DuelingQArgs
+from prl.environment.steinberger.PokerRL.game.poker_env_args import DiscretizedPokerEnvArgs, LimitPokerEnvArgs, NoLimitPokerEnvArgs
+from prl.environment.steinberger.PokerRL.rl.agent_modules.DDQN import DDQNArgs
+from prl.environment.steinberger.PokerRL.rl.neural.DuelingQNet import DuelingQArgs
 
 
 class RLBRArgs:
@@ -47,7 +47,7 @@ class RLBRArgs:
                  ):
 
         if nn_type == "recurrent":
-            from PokerRL.rl.neural.MainPokerModuleRNN import MPMArgsRNN
+            from prl.environment.steinberger.PokerRL.rl.neural.MainPokerModuleRNN import MPMArgsRNN
 
             mpm_args = MPMArgsRNN(rnn_cls_str=rnn_cls_str,
                                   rnn_units=rnn_units,
@@ -58,7 +58,7 @@ class RLBRArgs:
                                   n_merge_and_table_layer_units=n_merge_and_table_layer_units)
 
         elif nn_type == "feedforward":
-            from PokerRL.rl.neural.MainPokerModuleFLAT import MPMArgsFLAT
+            from prl.environment.steinberger.PokerRL.rl.neural.MainPokerModuleFLAT import MPMArgsFLAT
 
             mpm_args = MPMArgsFLAT(use_pre_layers=use_pre_layers,
                                    card_block_units=n_cards_state_units,

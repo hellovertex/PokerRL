@@ -5,8 +5,8 @@ import copy
 
 import numpy as np
 
-from PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
-from PokerRL.game._.wrappers._Wrapper import Wrapper
+from prl.environment.steinberger.PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
+from prl.environment.steinberger.PokerRL.game._.wrappers._Wrapper import Wrapper
 
 
 class RecurrentHistoryWrapper(Wrapper):

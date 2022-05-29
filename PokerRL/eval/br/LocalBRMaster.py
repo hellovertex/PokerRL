@@ -3,9 +3,9 @@
 
 import copy
 
-from PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
-from PokerRL.game._.tree.PublicTree import PublicTree
-from PokerRL.rl import rl_util
+from prl.environment.steinberger.PokerRL.eval._.EvaluatorMasterBase import EvaluatorMasterBase
+from prl.environment.steinberger.PokerRL.game._.tree.PublicTree import PublicTree
+from prl.environment.steinberger.PokerRL.rl import rl_util
 
 
 class LocalBRMaster(EvaluatorMasterBase):

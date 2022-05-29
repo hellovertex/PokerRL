@@ -7,8 +7,8 @@ from os.path import join as ospj
 
 import numpy as np
 
-from PokerRL._.CppWrapper import CppWrapper
-from PokerRL.game._.rl_env.game_rules import HoldemRules
+from prl.environment.steinberger.PokerRL._.CppWrapper import CppWrapper
+from prl.environment.steinberger.PokerRL.game._.rl_env.game_rules import HoldemRules
 
 
 class CppHandeval(CppWrapper):

@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from PokerRL.cfr._CFRBase import CFRBase as _CFRBase
+from prl.environment.steinberger.PokerRL.cfr._CFRBase import CFRBase as _CFRBase
 
 
 class CFRPlus(_CFRBase):

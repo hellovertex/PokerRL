@@ -2,9 +2,9 @@
 # Inspiration of architecture from DeepStack-Leduc (https://github.com/lifrordi/DeepStack-Leduc/tree/master/Source)
 import numpy as np
 
-from PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
-from PokerRL.game.PokerRange import PokerRange
-from PokerRL.game._.tree._.nodes import PlayerActionNode, ChanceNode
+from prl.environment.steinberger.PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs
+from prl.environment.steinberger.PokerRL.game.PokerRange import PokerRange
+from prl.environment.steinberger.PokerRL.game._.tree._.nodes import PlayerActionNode, ChanceNode
 
 
 class StrategyFiller:

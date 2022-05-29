@@ -1,9 +1,9 @@
 # Copyright (c) 2019 Eric Steinberger
 
 
-from PokerRL.game._.rl_env.base.PokerEnv import PokerEnv as _PokerEnv
+from prl.environment.steinberger.PokerRL.game._.rl_env.base.PokerEnv import PokerEnv as _PokerEnv
 
-from PokerRL.game.poker_env_args import NoLimitPokerEnvArgs
+from prl.environment.steinberger.PokerRL.game.poker_env_args import NoLimitPokerEnvArgs
 
 
 class NoLimitPokerEnv(_PokerEnv):

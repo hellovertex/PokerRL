@@ -7,10 +7,10 @@ import time
 import numpy as np
 from gym import spaces
 
-from PokerRL.game.Poker import Poker
-from PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs, PlayerDictIdxs
-from PokerRL.game._.rl_env.base._Deck import DeckOfCards
-from PokerRL.game._.rl_env.base._PokerPlayer import PokerPlayer
+from prl.environment.steinberger.PokerRL.game.Poker import Poker
+from prl.environment.steinberger.PokerRL.game.PokerEnvStateDictEnums import EnvDictIdxs, PlayerDictIdxs
+from prl.environment.steinberger.PokerRL.game._.rl_env.base._Deck import DeckOfCards
+from prl.environment.steinberger.PokerRL.game._.rl_env.base._PokerPlayer import PokerPlayer
 
 
 class PokerEnv:

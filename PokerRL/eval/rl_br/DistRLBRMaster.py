@@ -3,7 +3,7 @@
 
 import ray
 
-from PokerRL.eval.rl_br.LocalRLBRMaster import LocalRLBRMaster as _LocalEvalRLBRMaster
+from prl.environment.steinberger.PokerRL.eval.rl_br.LocalRLBRMaster import LocalRLBRMaster as _LocalEvalRLBRMaster
 
 
 @ray.remote(num_cpus=1)
