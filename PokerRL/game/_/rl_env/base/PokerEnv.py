@@ -520,7 +520,7 @@ class PokerEnv:
 
                     for p in winner_list:
                         if p.seat_id in self.info['payouts']:
-                            self.info['payouts'] += {f'{p.seat_id}': chips_per_winner}
+                            self.info['payouts'][f'{p.seat_id}'] += chips_per_winner
                         else:
                             self.info['payouts'] = {f'{p.seat_id}': chips_per_winner}
                         p.award(chips_per_winner)
