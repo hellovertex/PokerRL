@@ -471,7 +471,6 @@ class PokerEnv:
 
         if self.N_SEATS == 2:
             if self.seats[0].hand_rank > self.seats[1].hand_rank:
-                self.info['payouts'] = {0: self.main_pot}
                 if 0 in self.info['payouts']:
                     self.info['payouts'][0] += self.main_pot
                 else:
