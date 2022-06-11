@@ -1198,7 +1198,7 @@ class PokerEnv:
         # optionally synchronize random variables from another env
         if deck_state_dict is not None:
             self.load_cards_state_dict(cards_state_dict=deck_state_dict)
-
+        self.info['payouts'] = {}
         return self._get_current_step_returns(is_terminal=False, info=[False, None])
 
     def step_raise_pot_frac(self, pot_frac):
