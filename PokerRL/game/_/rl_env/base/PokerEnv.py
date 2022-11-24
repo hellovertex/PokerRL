@@ -258,8 +258,11 @@ class PokerEnv:
             # __________________________  Return Complete _Observation Space  __________________________
             # Tuple (lots of spaces.Discrete and spaces.Box)
             _observation_space = spaces.Tuple(_table_space + _player_space + _board_space)
-            _observation_space.shape = [len(_observation_space.spaces)]
-
+            try:
+                _observation_space.shape = [len(_observation_space.spaces)]
+            except AttributeError:
+                # newer version of gym dont allow setting shape attr
+                pass
         else:
             # __________________________  Public Information About Game State  _________________________
             _k = next_idx[0]
@@ -327,7 +330,11 @@ class PokerEnv:
             # __________________________  Return Complete _Observation Space  __________________________
             # Tuple (lots of spaces.Discrete and spaces.Box)
             _observation_space = spaces.Tuple(_table_space + _player_space + _board_space)
-            _observation_space.shape = [len(_observation_space.spaces)]
+            try:
+                _observation_space.shape = [len(_observation_space.spaces)]
+            except AttributeError:
+                # newer version of gym dont allow setting shape attr
+                pass
         return _observation_space, obs_idx_dict, obs_parts_idxs_dict
 
     def _init_from_args(self, env_args, is_evaluating):
@@ -1342,7 +1349,7 @@ class PokerEnv:
 
         """
         if is_terminal:
-            return np.zeros(shape=self.observation_space.shape, dtype=np.float32)  # terminal is all zero
+            return np.zeros(shape=(self.observation_space.__len__(),), dtype=np.float32)  # terminal is all zero
         normalization_sum = float(sum([s.starting_stack_this_episode for s in self.seats])) / self.N_SEATS
         return np.array(self._get_table_state(normalization_sum=normalization_sum) \
                         + self._get_player_states_all_players(normalization_sum=normalization_sum) \
