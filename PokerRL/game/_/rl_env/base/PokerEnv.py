@@ -528,7 +528,7 @@ class PokerEnv:
                         if p.seat_id in self.info['payouts']:
                             self.info['payouts'][p.seat_id] += chips_per_winner
                         else:
-                            self.info['payouts'] = {p.seat_id: chips_per_winner}
+                            self.info['payouts'][p.seat_id] = chips_per_winner
                         p.award(chips_per_winner)
 
                     # distribute the rest randomly.
